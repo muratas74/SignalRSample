@@ -60,7 +60,7 @@
                         "    <div class='chat-body clearfix'>" +
                         "        <div class='header'>" +
                         "            <strong class='primary-font'>" + username + "</strong>" +
-                        "            <small class='pull-right text-muted'><i class='fa fa-clock-o'></i> " + moment(time, 'YYYYMMDDHHmmSS').fromNow() + "</small>" +
+                        "            <small class='pull-right text-muted'><i class='fa fa-clock-o'></i> " + moment(time, 'YYYYMMDDHHmmSS').utc().fromNow() + "</small>" +
                         "        </div>" +
                         "        <p>" +
                         "            " + message + "" +
