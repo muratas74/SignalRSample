@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>title</title>
+    <title>Public Chat</title>
     <link href="~/Content/reset.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
@@ -18,18 +18,10 @@
     <script src="~/signalr/hubs"></script>
     <script type="text/javascript">
         var chats = $.connection.chatHub;
-        chats.connection.start().then(function(e) {
-            console.log(e);
-        });
+        chats.connection.start();
     </script>
 </head>
 <body>
-    
-    
-    
-    
-    
-    
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <div class="bootstrap snippet">
         <div class="row">
@@ -41,20 +33,7 @@
                 </div>
                 <div class="chat-message">
                     <ul class="chat">
-                        @*<li class="left clearfix">
-                            <span class="chat-img pull-left">
-                                <img src="http://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
-                            </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <strong class="primary-font">John Doe</strong>
-                                    <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 12 mins ago</small>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                </p>
-                            </div>
-                        </li>*@
+
                     </ul>
                 </div>
                 <div class="chat-box bg-white">
@@ -68,17 +47,6 @@
             </div>
         </div>
     </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
 
 <script type="text/javascript">
     //js method
