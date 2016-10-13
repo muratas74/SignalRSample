@@ -28,7 +28,7 @@ namespace SignalRChat.Hubs
             if (Timer != null)
                 return;
 
-            Timer = new Timer(ServerClock, this, 0, 1000);
+            Timer = new Timer(ServerClock, this, 0, 60000);
         }
 
         //server method
