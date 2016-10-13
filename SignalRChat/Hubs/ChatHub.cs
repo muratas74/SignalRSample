@@ -14,7 +14,7 @@ namespace SignalRChat.Hubs
 
         private void ServerClock(object state)
         {
-            Clients.All.ServerClock(DateTime.UtcNow.ToString("O"));
+            Clients.Caller.ServerClock(DateTime.UtcNow.ToString("O"));
         }
 
         public override Task OnConnected()

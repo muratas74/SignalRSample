@@ -32,7 +32,6 @@
                 <div class="panel">
                     <div class="panel-body">
                         <input class="form-control no-shadow no-rounded" placeholder="Type your name here" id="name">
-                        <div id="serverClock"></div>
                     </div>
 
                 </div>
@@ -42,6 +41,8 @@
                     </ul>
                 </div>
                 <div class="chat-box bg-white">
+                    <div id="serverClock"></div>
+                    <br/>
                     <div class="input-group">
                         <input class="form-control border no-shadow no-rounded" placeholder="Type your message here" id="message">
                         <span class="input-group-btn">
@@ -78,7 +79,7 @@
     };
 
     chats.client.serverClock = function (time) {
-        var template = "<small class='pull-right text-muted'><i class='fa fa-clock-o'></i> Server Time: " + moment(moment.utc(time).toDate()).format('MMMM Do YYYY, HH:mm:SS') + "</small>";
+        var template = "<small class='pull-right text-muted'><i class='fa fa-clock-o'></i> Server Time: " + moment(moment.utc(time).toDate()).format('LLLL') + "</small>";
         $("#serverClock").html(template);
     }
 
