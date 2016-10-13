@@ -7,9 +7,15 @@
 <html>
 <head>
     <title>title</title>
-    <script src="~/Scripts/jquery-1.6.4.min.js"></script>
+    <link href="~/Content/reset.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
     <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
-    <script src="signalr/hubs"></script>
+    <script src="~/signalr/hubs"></script>
     <script type="text/javascript">
         var chats = $.connection.chatHub;
         chats.connection.start().then(function(e) {
@@ -18,29 +24,106 @@
     </script>
 </head>
 <body>
-    <div>
-        <input type="text" name="username" id="username" />
-        <input type="text" name="message" id="message" />
-        <input type="button" name="send" id="send" value="send" />
-        <div id="messages"></div>
+    
+    
+    
+    
+    
+    
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="bootstrap snippet">
+        <div class="row">
+            <div class="col-md-12 bg-white ">
+                <div class="panel">
+                    <div class="panel-body">
+                        <input class="form-control no-shadow no-rounded" placeholder="Type your name here" id="name">
+                    </div>
+                </div>
+                <div class="chat-message">
+                    <ul class="chat">
+                        @*<li class="left clearfix">
+                            <span class="chat-img pull-left">
+                                <img src="http://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
+                            </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">John Doe</strong>
+                                    <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 12 mins ago</small>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                </p>
+                            </div>
+                        </li>*@
+                    </ul>
+                </div>
+                <div class="chat-box bg-white">
+                    <div class="input-group">
+                        <input class="form-control border no-shadow no-rounded" placeholder="Type your message here" id="message">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success no-rounded" type="button" id="send-button">Send</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
 
 <script type="text/javascript">
     //js method
-    chats.client.receive = function (username, message) {
-        $("#messages").prepend("<div>" + username + ": </div><div>" + message + "</div><br/>");
-    }
+    chats.client.receive = function (username, message, time) {
 
-    //js method
-    chats.client.log = function(message) {
-        $("#messages").prepend("<div>" + message + "</div>");
-    }
+        var template = 
+                        "<li class='" + (username == $("#name").val() ? "left" : "right") + " clearfix'>" +
+                        "    <span class='chat-img " + (username == $("#name").val() ? "pull-left" : "pull-right") + "'>" +
+                        "        <img src='http://placehold.it/50/EEE/FFF&text=" + username[0] + username[1] + "' alt='" + username + "'>" +
+                        "    </span>" +
+                        "    <div class='chat-body clearfix'>" +
+                        "        <div class='header'>" +
+                        "            <strong class='primary-font'>" + username + "</strong>" +
+                        "            <small class='pull-right text-muted'><i class='fa fa-clock-o'></i> " + moment(time, 'YYYYMMDDHHmmSS').fromNow() + "</small>" +
+                        "        </div>" +
+                        "        <p>" +
+                        "            " + message + "" +
+                        "        </p>" +
+                        "    </div>" +
+                        "</li>" ;
 
-    $("#send").click(function (e) {
-        e.preventDefault();
+        $(".chat").append(template);
+    };
+
+    function sendMessage() {
         //server method
-        chats.server.send($("#username").val(), $("#message").val());
-    });
+        if (!!$("#name").val() && !!$("#message").val()) {
+            chats.server.send($("#name").val(), $("#message").val());
+            $("#message").val("");
+        }
+    }
+
+    $("#message")
+        .keypress(function(e) {
+            if (e.which == 13) {
+                e.preventDefault();
+                sendMessage(e);
+            }
+        });
+
+    $("#send-button")
+        .click(function (e) {
+            e.preventDefault();
+            sendMessage();
+        });
 
 </script>
 

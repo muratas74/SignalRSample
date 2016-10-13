@@ -1,6 +1,6 @@
 ﻿
 using System;
-using System.Globalization;
+using System.Web;
 using Microsoft.AspNet.SignalR;
 
 namespace SignalRChat.Hubs
@@ -11,15 +11,7 @@ namespace SignalRChat.Hubs
         public void Send(string username, string message)
         {
             //js method
-            Clients.All.Receive(username, message);
-            Log(DateTime.Now.ToString(CultureInfo.InvariantCulture));
-        }
-
-        //server method
-        public void Log(string info)
-        {
-            //js method
-            Clients.All.Log(info);
+            Clients.All.Receive(HttpUtility.HtmlEncode(username), HttpUtility.HtmlEncode(message), DateTime.Now.ToString("yyyyMMddhhmmss"));
         }
     }
 }
