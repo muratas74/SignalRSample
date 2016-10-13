@@ -72,6 +72,7 @@
                         "</li>" ;
 
         $(".chat").append(template);
+        jQuery("html body").scrollTop(jQuery(".chat-message")[0].scrollHeight);
     };
 
     function sendMessage() {
